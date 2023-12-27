@@ -1,0 +1,13 @@
+from qiskit import QuantumCircuit
+from qiskit_ibm_runtime import QuantumRuntimeService, Sampler
+
+circuit = QuantumCircuit(2)
+circuit.measure_all()
+
+service = QuantumRuntimeService()
+backend = service.backend("ibm_qasm_simulator")
+
+job= Sampler(backend).run(circuit)
+print(f" job id: {job.job_id()}")
+results = job.result()
+print(results)
